@@ -76,7 +76,7 @@
         }
 
         .logo span {
-            color: #0a84ff;
+            color: #0c922e;
         }
 
         .actions {
@@ -86,26 +86,37 @@
             align-items: center;
         }
 
-        button {
+button {
 
-            border: none;
+    border: none;
 
-            border-radius: 999px;
+    border-radius: 999px;
 
-            padding: 12px 22px;
+    padding: 12px 20px;
 
-            cursor: pointer;
+    cursor: pointer;
 
-            font-weight: 600;
+    font-weight: 600;
 
-            transition: 0.2s;
+    transition: 0.2s;
 
-            color: white;
-        }
+    color: white;
 
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    white-space: nowrap;
+}
         .run-btn {
 
-            background: #0a84ff;
+            background: #096f23;
         }
 
         .run-btn:hover {
@@ -119,10 +130,22 @@
             background: #2c2c2e;
         }
 
-        .dict-btn {
+.dict-btn {
 
-            background: #2c2c2e;
-        }
+    background: #2c2c2e;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    white-space: nowrap;
+
+    line-height: 1;
+}
 
         .container {
 
@@ -307,6 +330,76 @@
 
             white-space: pre-wrap;
         }
+.dict-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.python-btn-logo {
+
+    width: 18px;
+    height: 18px;
+
+    filter: drop-shadow(0 0 3px rgba(255,255,255,0.08));
+}
+
+.python-logo {
+
+    width: 24px;
+    height: 24px;
+
+    object-fit: contain;
+}
+
+.copy-mini {
+
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    background: rgba(255,255,255,0.06);
+
+    border: none;
+
+    color: #8e8e93;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    line-height: 1;
+
+    font-size: 14px;
+}
+
+.copy-mini:hover {
+
+    background: rgba(255,255,255,0.12);
+
+    color: white;
+}
+
+.code-wrapper {
+
+    position: relative;
+}
 
         @media(max-width: 768px) {
 
@@ -356,9 +449,16 @@
 
             <div class="actions">
 
-                <button class="dict-btn" onclick="toggleDictionary()">
-                    🐍 Dicionário Python
-                </button>
+<button class="dict-btn" onclick="toggleDictionary()">
+
+    <img
+        src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+        class="python-btn-logo"
+    >
+
+      Dicionário Python
+
+</button>
 
                 <button class="dict-btn" onclick="toggleExamples()">
                     💡 Exemplos
@@ -414,8 +514,16 @@ Carregando Python...
 
         <div class="sidebar-header">
 
-            <h2>🐍 Dicionário Python</h2>
+<h2 class="dict-title">
 
+    <img
+        src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+        class="python-logo"
+    >
+
+    Dicionário Python
+
+</h2>
             <button class="close-sidebar" onclick="toggleDictionary()">
                 ✕
             </button>
@@ -490,7 +598,7 @@ pessoa = {
 }
         </div>
 
-        <h3>Classes e Objetos</h3>
+        <h3>Classes e Objetos (POO)</h3>
 
         <p>
             Programação Orientada a Objetos (POO) organiza o código em objetos e classes.
@@ -510,32 +618,100 @@ p1 = Pessoa("Nochelli")
 p1.apresentar()
         </div>
 
+<h3>Herança</h3>
+
+<p>
+    Uma classe pode herdar características de outra.
+</p>
+
+<div class="code-example">
+class Animal:
+
+    def falar(self):
+        print("Som do animal")
+
+class Cachorro(Animal):
+
+    def falar(self):
+        print("Au au")
+
+dog = Cachorro()
+
+dog.falar()
+</div>
+
+<h3>Métodos</h3>
+
+<p>
+    Métodos são funções dentro de uma classe.
+</p>
+
+<div class="code-example">
+class Calculadora:
+
+    def soma(self, a, b):
+        return a + b
+
+calc = Calculadora()
+
+print(calc.soma(5, 3))
+</div>
+
+<h3>Encapsulamento</h3>
+
+<p>
+    Encapsulamento protege dados internos da classe.
+</p>
+
+<div class="code-example">
+class Conta:
+
+    def __init__(self):
+        self.__saldo = 100
+
+conta = Conta()
+
     </div>
 
-    <!-- SIDEBAR EXEMPLOS -->
+<!-- SIDEBAR EXEMPLOS -->
 
-    <div class="sidebar" id="examplesSidebar">
+<div class="sidebar" id="examplesSidebar">
 
-        <div class="sidebar-header">
+    <div class="sidebar-header">
 
-            <h2>💡 Exemplos Python</h2>
+        <h2>💡 Exemplos Python</h2>
 
-            <button class="close-sidebar" onclick="toggleExamples()">
-                ✕
-            </button>
+        <button class="close-sidebar" onclick="toggleExamples()">
+            ✕
+        </button>
 
+    </div>
+
+    <!-- HELLO WORLD -->
+    <h3>Hello World</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">print("Olá mundo!")
         </div>
 
-        <h3>Hello World</h3>
+    </div>
 
-        <div class="code-example">
-print("Olá mundo!")
-        </div>
+    <!-- PAR OU IMPAR -->
 
-        <h3>Verificar número par</h3>
+    <h3>Verificar número par</h3>
 
-        <div class="code-example">
-numero = 10
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">numero = 10
 
 if numero % 2 == 0:
     print("Par")
@@ -543,14 +719,23 @@ else:
     print("Ímpar")
         </div>
 
-        <h3>FizzBuzz (Entrevista)</h3>
+    </div>
 
-        <p>
-            Exercício clássico de entrevistas.
-        </p>
+    <!-- FIZZBUZZ -->
 
-        <div class="code-example">
-for i in range(1, 101):
+    <h3>FizzBuzz</h3>
+
+    <p>
+        Exercício clássico de entrevistas.
+    </p>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">for i in range(1, 101):
 
     if i % 3 == 0 and i % 5 == 0:
         print("FizzBuzz")
@@ -565,19 +750,37 @@ for i in range(1, 101):
         print(i)
         </div>
 
-        <h3>Palíndromo</h3>
+    </div>
 
-        <div class="code-example">
-texto = "radar"
+    <!-- PALINDROMO -->
+
+    <h3>Palíndromo</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">texto = "radar"
 
 if texto == texto[::-1]:
     print("É palíndromo")
         </div>
 
-        <h3>Busca Linear</h3>
+    </div>
 
-        <div class="code-example">
-lista = [1, 5, 8, 10]
+    <!-- BUSCA LINEAR -->
+
+    <h3>Busca Linear</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">lista = [1, 5, 8, 10]
 
 for item in lista:
 
@@ -585,10 +788,19 @@ for item in lista:
         print("Encontrado")
         </div>
 
-        <h3>Função Recursiva</h3>
+    </div>
 
-        <div class="code-example">
-def fatorial(n):
+    <!-- FATORIAL -->
+
+    <h3>Função Recursiva</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">def fatorial(n):
 
     if n == 1:
         return 1
@@ -599,6 +811,174 @@ print(fatorial(5))
         </div>
 
     </div>
+
+    <!-- BUBBLE SORT -->
+
+    <h3>Bubble Sort</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">numeros = [5, 2, 8, 1]
+
+for i in range(len(numeros)):
+
+    for j in range(len(numeros)-1):
+
+        if numeros[j] > numeros[j+1]:
+
+            numeros[j], numeros[j+1] = numeros[j+1], numeros[j]
+
+print(numeros)
+        </div>
+
+    </div>
+
+    <!-- NUMERO PRIMO -->
+
+    <h3>Número Primo</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">numero = 17
+
+primo = True
+
+for i in range(2, numero):
+
+    if numero % i == 0:
+        primo = False
+
+print(primo)
+        </div>
+
+    </div>
+
+    <!-- FIBONACCI -->
+
+    <h3>Fibonacci</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">a, b = 0, 1
+
+for i in range(10):
+
+    print(a)
+
+    a, b = b, a + b
+        </div>
+
+    </div>
+
+    <!-- INVERTER STRING -->
+
+    <h3>Inverter String</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">texto = "python"
+
+invertido = texto[::-1]
+
+print(invertido)
+        </div>
+
+    </div>
+
+    <!-- CONTADOR -->
+
+    <h3>Contador de Letras</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">texto = "banana"
+
+contador = {}
+
+for letra in texto:
+
+    if letra in contador:
+        contador[letra] += 1
+    else:
+        contador[letra] = 1
+
+print(contador)
+        </div>
+
+    </div>
+
+    <!-- MAIOR NUMERO -->
+
+    <h3>Encontrar Maior Número</h3>
+
+    <div class="code-wrapper">
+
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+
+        <div class="code-example">lista = [10, 55, 3, 99, 24]
+
+maior = max(lista)
+
+print(maior)
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function copyCode(button) {
+
+    const code =
+        button.parentElement
+        .querySelector(".code-example")
+        .innerText;
+
+    const textarea =
+        document.createElement("textarea");
+
+    textarea.value = code;
+
+    document.body.appendChild(textarea);
+
+    textarea.select();
+
+    document.execCommand("copy");
+
+    document.body.removeChild(textarea);
+
+    button.innerText = "✓";
+
+    setTimeout(() => {
+
+        button.innerText = "⧉";
+
+    }, 1000);
+}
+
+</script>
 
     <script>
 
