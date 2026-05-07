@@ -162,8 +162,8 @@ button {
 
             padding: 10px 30px 40px;
 
-            overflow: hidden;
-        }
+    overflow-y: auto;
+    overflow-x: hidden;        }
 
         .editor-box,
         .output-box {
@@ -1029,6 +1029,10 @@ function copyCode(button) {
         async function start() {
 
             pyodide = await loadPyodide();
+            await pyodide.runPythonAsync(`
+import sys
+sys.stdout = sys.__stdout__
+`);
 
             document.getElementById("output").innerText =
                 "Python carregado 🚀";
@@ -1119,38 +1123,44 @@ for i in range(5):
                 "Terminal limpo.";
         }
 
-        async function runPython() {
+async function runPython() {
 
-            const code = editor.getValue();
+    const code = editor.getValue();
+    const output = document.getElementById("output");
 
-            const output =
-                document.getElementById("output");
+    output.innerText = "Executando...";
 
-            output.innerText = "Executando...";
-
-            try {
-
-                pyodide.runPython(`
+    try {
+        await pyodide.runPythonAsync(`
 import sys
 from io import StringIO
 
-sys.stdout = StringIO()
-                `);
+_output = StringIO()
+_sys_stdout_original = sys.stdout
+sys.stdout = _output
+        `);
 
-                pyodide.runPython(code);
+        await pyodide.runPythonAsync(code);
 
-                const result = pyodide.runPython(
-                    "sys.stdout.getvalue()"
-                );
+        const result = await pyodide.runPythonAsync(`
+sys.stdout.getvalue()
+        `);
 
-                output.innerText =
-                    result || "Código executado sem saída.";
+        await pyodide.runPythonAsync(`
+sys.stdout = _sys_stdout_original
+        `);
 
-            } catch (err) {
+        output.innerText = result || "Código executado sem saída.";
 
-                output.innerText = err;
-            }
-        }
+    } catch (err) {
+        output.innerText = err;
+
+        // garante reset mesmo em erro
+        try {
+            await pyodide.runPythonAsync("sys.stdout = sys.__stdout__");
+        } catch (e) {}
+    }
+}
 
     </script>
 
