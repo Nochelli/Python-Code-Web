@@ -404,45 +404,40 @@ button {
 @media(max-width: 768px) {
 
     .topbar {
-        padding: 12px;
-        height: auto;
+        padding: 10px;
     }
 
     .topbar-content {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
+        gap: 8px;
     }
 
     .logo {
-        text-align: center;
+        font-size: 18px;
     }
 
     .actions {
-
-        flex-direction: column; /* 🔥 AQUI É O QUE FALTAVA */
-
-        width: 100%;
-
-        gap: 10px;
+        gap: 8px;
     }
 
-    button {
-        width: 100%;
-        justify-content: center;
-    }
 
-    #editor {
-        height: 300px;
-    }
+button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+#editor {
+    width: 100%;
+    touch-action: manipulation;
+}
 
     .container {
         padding: 10px;
     }
 
-    .sidebar {
-        width: 100%;
-    }
+.sidebar {
+    height: 100dvh; /* melhor para mobile */
+    -webkit-overflow-scrolling: touch;
+}
 
     .editor-box,
     .output-box {
