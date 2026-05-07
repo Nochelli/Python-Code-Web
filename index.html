@@ -25,20 +25,24 @@
             box-sizing: border-box;
         }
 
-        body {
+body {
 
-            background: #0f0f10;
-            color: white;
+    background: #0f0f10;
 
-            font-family: Inter, sans-serif;
+    color: white;
 
-            height: 100vh;
+    font-family: Inter, sans-serif;
 
-            display: flex;
-            flex-direction: column;
+    min-height: 100vh;
 
-            overflow: hidden;
-        }
+    display: flex;
+
+    flex-direction: column;
+
+    overflow-x: hidden;
+
+    overflow-y: auto;
+}
 
         .topbar {
 
@@ -163,7 +167,6 @@ button {
 
             padding: 10px 30px 40px;
 
-            overflow: hidden;
         }
 
         .editor-box,
@@ -403,6 +406,24 @@ button {
 
 @media(max-width: 768px) {
 
+
+    body {
+
+        overflow-y: auto;
+    }
+
+    .container {
+
+        overflow: visible;
+    }
+
+    .sidebar {
+
+        overflow-y: auto;
+
+        -webkit-overflow-scrolling: touch;
+    }
+}
     .topbar {
 
         padding: 16px;
