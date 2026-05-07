@@ -401,37 +401,68 @@ button {
     position: relative;
 }
 
-        @media(max-width: 768px) {
+@media(max-width: 768px) {
 
-            .topbar {
+    .topbar {
 
-                padding: 0 16px;
+        padding: 16px;
 
-                height: auto;
+        height: auto;
+    }
 
-                min-height: 70px;
-            }
+    .topbar-content {
 
-            .actions {
+        flex-direction: column;
 
-                flex-wrap: wrap;
-            }
+        align-items: stretch;
 
-            .container {
+        gap: 16px;
+    }
 
-                padding: 16px;
-            }
+    .logo {
 
-            #editor {
+        text-align: center;
+    }
 
-                height: 320px;
-            }
+    .actions {
 
-            .sidebar {
+        width: 100%;
 
-                width: 100%;
-            }
-        }
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    button {
+
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .container {
+
+        padding: 16px;
+    }
+
+    #editor {
+
+        height: 320px;
+    }
+
+    .sidebar {
+
+        width: 100%;
+    }
+
+    .editor-box,
+    .output-box {
+
+        max-width: 100%;
+    }
+}
 
     </style>
 
