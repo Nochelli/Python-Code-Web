@@ -57,6 +57,10 @@
             color: #0c922e;
         }
 
+                .ai-header span {
+            color: #0c922e;
+        }
+
         .actions {
 
             display: flex;
@@ -140,6 +144,83 @@ button:active {
     box-shadow: 0 2px 6px rgba(0,0,0,0.18);
 }
 
+.ai-window {
+
+    position: fixed;
+
+    left: 20px;
+top: 120px;
+left: 20px;
+    width: 280px;
+    height: 400px;
+
+    background: rgba(20, 20, 20, 0.65);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 24px;
+
+    padding: 20px;
+
+    z-index: 9999;
+
+    overflow-y: auto;
+
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+
+    color: white;
+
+    font-family: Inter;
+}
+
+.ai-header {
+
+    cursor: move;
+
+    user-select: none;
+
+    margin-bottom: 15px;
+}
+.ai-btn {
+
+    width: 100%;
+
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #198609;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+#resultado {
+
+    white-space: pre-wrap;
+
+    background: #0b0b0b;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    margin-top: 15px;
+
+    min-height: 200px;
+
+    border: 1px solid #222;
+}
 
 .dict-btn {
 
@@ -270,6 +351,8 @@ button:active {
 
             right: 0;
             border-radius: 24px;
+            border: 1px solid rgba(60, 130, 35, 0.848);
+
         }
 
         .sidebar-header {
@@ -279,9 +362,108 @@ button:active {
             align-items: center;
 
             justify-content: space-between;
-
+            
             margin-bottom: 20px;
         }
+
+        /* BOTÃO ROBÔ */
+
+.ai-float-btn {
+
+    position: fixed;
+
+    left: 20px;
+    bottom: 20px;
+
+    width: 65px;
+    height: 65px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: rgba(20,20,20,0.8);
+
+    backdrop-filter: blur(10px);
+
+    color: white;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    z-index: 99999;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+
+    transition: 0.2s;
+}
+
+.ai-float-btn:hover {
+
+    transform: scale(1.08);
+}
+
+/* JANELA IA */
+
+.ai-window {
+
+    position: fixed;
+
+    left: 20px;
+    bottom: 100px;
+
+    width: 350px;
+    height: 450px;
+
+    background: rgba(29, 27, 27, 0.878);
+
+    backdrop-filter: blur(12px);
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(60, 130, 35, 0.848);
+
+    padding: 20px;
+
+    color: white;
+
+    z-index: 99998;
+
+    display: none;
+
+    overflow-y: auto;
+}
+
+/* HEADER */
+
+.ai-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+
+    cursor: move;
+}
+
+/* FECHAR */
+
+.close-ai {
+
+    background: transparent;
+
+    border: none;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
 
         .close-sidebar {
 
@@ -341,6 +523,7 @@ button:active {
             font-family: Consolas;
 
             white-space: pre-wrap;
+            
         }
 .dict-title {
 
@@ -366,6 +549,7 @@ button:active {
 
     object-fit: contain;
 }
+
 
 .copy-mini {
 
