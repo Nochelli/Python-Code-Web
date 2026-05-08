@@ -372,6 +372,42 @@ for item in lista:
         </div>
 
     </div>
+<!-- BUSCA BINÁRIA -->
+
+<h3>Busca Binária</h3>
+
+<div class="code-wrapper">
+
+    <button class="copy-mini" onclick="copyCode(this)">
+        ⧉
+    </button>
+
+    <div class="code-example">def busca_binaria(lista, alvo):
+
+    inicio = 0
+    fim = len(lista) - 1
+
+    while inicio <= fim:
+
+        meio = (inicio + fim) // 2
+
+        if lista[meio] == alvo:
+            return True
+
+        elif lista[meio] < alvo:
+            inicio = meio + 1
+
+        else:
+            fim = meio - 1
+
+    return False
+
+numeros = [1, 3, 5, 7, 9, 11]
+
+print(busca_binaria(numeros, 7))
+    </div>
+
+</div>
 
     <!-- FATORIAL -->
 
