@@ -351,6 +351,8 @@ left: 20px;
 
             right: 0;
             border-radius: 24px;
+    
+
         }
 
         .sidebar-header {
@@ -667,5 +669,34 @@ left: 20px;
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
     }
+/* PROFESSOR IA MOBILE */
+.ai-window {
+
+    width: 260px;
+    max-width: 90%;
+
+    bottom: 80px;
+    left: 10px;
+
+    padding: 12px;
+
+    border-radius: 18px;
+
+    font-size: 13px;
+}
+
+.ai-header h2 {
+    font-size: 15px;
+}
+
+.ai-btn {
+    font-size: 13px;
+    padding: 10px;
+}
+
+#resultado {
+    max-height: 180px;
+    font-size: 12px;
+}
 }
 
