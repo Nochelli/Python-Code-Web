@@ -439,8 +439,11 @@ if texto == texto[::-1]:
             É uma palavra formada pela reorganização das letras de outra.
         </p>
 
-        <div class="code-example">
-def Anagram(s1,s2):
+        <div class="code-wrapper">
+        <button class="copy-mini" onclick="copyCode(this)">
+            ⧉
+        </button>
+        <div class="code-example">def anagram(s1,s2):
     s1 = s1.replace(' ','').lower()
     s2 = s2.replace(' ','').lower()
     if sorted(s1) == sorted(s2):
@@ -450,7 +453,8 @@ def Anagram(s1,s2):
 
 s1 = 'galeria'
 s2 = 'alegria'
-print(Anagram(s1,s2))
+print(anagram(s1,s2))
+        </div>
         </div>
 
     <!-- BUSCA LINEAR -->
