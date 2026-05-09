@@ -166,8 +166,6 @@ else:
 
         </div>
 
-
-
         <h3>Listas</h3>
 
         <p>
@@ -202,6 +200,7 @@ pessoa = {
     "idade": 22
 }
         </div>
+
 
         <h3>Classes e Objetos (POO)</h3>
 
@@ -415,6 +414,11 @@ else:
 
     <h3>Palíndromo</h3>
 
+        <p>
+            É uma palavra que, lida de trás para frente, permanece a mesma palavra.
+        </p>
+
+
     <div class="code-wrapper">
 
         <button class="copy-mini" onclick="copyCode(this)">
@@ -429,9 +433,33 @@ if texto == texto[::-1]:
 
     </div>
 
+    <h3>Anagramas</h3>
+
+        <p>
+            É uma palavra formada pela reorganização das letras de outra.
+        </p>
+
+        <div class="code-example">
+def Anagram(s1,s2):
+    s1 = s1.replace(' ','').lower()
+    s2 = s2.replace(' ','').lower()
+    if sorted(s1) == sorted(s2):
+        return True
+    else:
+        return False
+
+s1 = 'galeria'
+s2 = 'alegria'
+print(Anagram(s1,s2))
+        </div>
+
     <!-- BUSCA LINEAR -->
 
     <h3>Busca Linear</h3>
+
+        <p>
+            Percorre a lista elemento por elemento usando um laço 'for'
+        </p>
 
     <div class="code-wrapper">
 
@@ -451,6 +479,10 @@ for item in lista:
 <!-- BUSCA BINÁRIA -->
 
 <h3>Busca Binária</h3>
+
+        <p>
+            Divide a lista (que deve estar ordenada) ao meio repetidamente para encontrar o alvo.
+        </p>
 
 <div class="code-wrapper">
 
