@@ -424,4 +424,4 @@ document.addEventListener("click", (e) => {
         examplesSidebar.classList.remove("open");
     }
 
-});
+}
