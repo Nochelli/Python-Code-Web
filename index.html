@@ -1,719 +1,744 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<head>
+        body {
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            background: #0f0f10;
+            color: white;
 
-    <title>PyLab by Nochelli</title>
+            font-family: Inter, sans-serif;
 
-    <!-- PYODIDE -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+        }
 
-    <!-- MONACO -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
 
-    <!-- FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <script type="module" src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+        .topbar {
 
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="./manifest.json">
-    <link rel="apple-touch-icon" href="icon-192.png">
+            height: 70px;
 
-<body>
+            background: rgba(28,28,30,0.9);
 
-    <div class="topbar">
+            border-bottom: 1px solid rgba(255,255,255,0.05);
 
-        <div class="topbar-content">
+            display: flex;
 
-            <div class="logo">
-                Py<span>Lab</span>
-            </div>
+            align-items: center;
+            justify-content: center;
 
-            <div class="actions">
+            padding: 0 24px;
+        }
 
-<button class="dict-btn" onclick="toggleDictionary()">
+        .topbar-content {
 
-    <img
-        src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
-        class="python-btn-logo"
-    >
+            width: 100%;
 
-      PyDocs
+            max-width: 950px;
 
-</button>
+            display: flex;
 
-                <button class="dict-btn" onclick="toggleExamples()">
-                    💡 Code Examples
-                </button>
+            align-items: center;
 
-                <button class="clear-btn" onclick="clearEditor()">
-                    Erase
-                </button>
+            justify-content: space-between;
+        }
 
-                <button class="run-btn" onclick="runPython()">
-                    ▶ Run
-                </button>
+        .logo {
 
-            </div>
+            font-size: 22px;
+            font-weight: 700;
+        }
 
-        </div>
+        .logo span {
+            color: #0c922e;
+        }
 
-    </div>
+                .ai-header span {
+            color: #0c922e;
+        }
 
-    <div class="container">
+        .actions {
 
-        <div class="editor-box">
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
 
-            <div class="section-title">
-                editor.py
-            </div>
+button {
 
-            <div id="editor"></div>
+    border: none;
 
-        </div>
+    border-radius: 999px;
 
-        <div class="output-box">
+    padding: 12px 20px;
 
-            <div class="section-title">
-                Terminal
-            </div>
+    cursor: pointer;
 
-            <div id="output">
-Loading Python...
-            </div>
+    font-weight: 600;
 
-        </div>
+    transition: 0.2s;
 
-    </div>
+    color: white;
 
-    <div class="footer">
-        Projetado para praticar a sintaxe Python by Nochelli
-    </div>
+    height: 44px;
 
-    <!-- SIDEBAR DICIONÁRIO -->
+    display: flex;
 
-    <div class="sidebar" id="sidebar">
+    align-items: center;
 
-        <div class="sidebar-header">
+    justify-content: center;
 
-<h2 class="dict-title">
+    gap: 8px;
 
-    <img
-        src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
-        class="python-logo"
-    >
-
-    Learn Python
-
-</h2>
-            <button class="close-sidebar" onclick="toggleDictionary()">
-                ✕
-            </button>
-
-        </div>
-
-        <h3>Variáveis</h3>
-
-        <p>
-            Variáveis armazenam valores.
-        </p>
-
-        <div class="code-example">
-nome = "Nochelli"
-idade = 25
-        </div>
-
-        <h3>Funções</h3>
-
-        <p>
-            Funções organizam código reutilizável.
-        </p>
-
-        <div class="code-example">
-def soma(a, b):
-    return a + b
-        </div>
-
-        <h3>Loops</h3>
-
-        <p>
-            Repetem ações automaticamente.
-        </p>
-
-        <div class="code-example">
-for i in range(5):
-    print(i)
-        </div>
-
-        <h3>Condições</h3>
-
-        <p>
-            A condição testa se algo é True ou False.
-        </p>
-
-        <div class="code-example">
-idade = 20
-if idade >= 18:
-    print("Maior de idade") 
-else:
-    print("Menor de idade") 
-
-        </div>
-
-        <h3>Listas</h3>
-
-        <p>
-            Guardam múltiplos valores.
-        </p>
-
-        <div class="code-example">
-frutas = ["maçã", "banana"]
-        </div>
-
-        <h3>Tuplas</h3>
-
-        <p>
-            Tuplas armazenam múltiplos valores, mas não podem ser alteradas.
-        </p>
-
-        <div class="code-example">
-cores = ("azul", "verde", "vermelho")
-
-print(cores[0])
-        </div>
-
-        <h3>Dicionários</h3>
-
-        <p>
-            Guardam dados em chave e valor.
-        </p>
-
-        <div class="code-example">
-pessoa = {
-    "nome": "Ana",
-    "idade": 22
+    white-space: nowrap;
 }
-        </div>
+        .run-btn {
 
+            background: #096f23;
+        }
 
-        <h3>Classes e Objetos (POO)</h3>
+        .run-btn:hover {
 
-        <p>
-            Programação Orientada a Objetos (POO) organiza o código em objetos e classes.
-        </p>
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
 
-        <div class="code-example">
-class Pessoa:
+        .clear-btn {
 
-    def __init__(self, nome):
-        self.nome = nome
+            background: #2c2c2e;
+        
+    transition:
+        transform 0.15s ease,
+        opacity 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 
-    def apresentar(self):
-        print("Olá,", self.nome)
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
 
-p1 = Pessoa("Nochelli")
+    -webkit-tap-highlight-color: transparent;
 
-p1.apresentar()
-        </div>
+    user-select: none;
+        
+        
+        
+        }
 
-<h3>Métodos</h3>
 
-<p>
-    Métodos são funções dentro de uma classe.
-</p>
+        button:hover {
 
-<div class="code-example">
-class Calculadora:
+    transform: translateY(-2px);
 
-    def soma(self, a, b):
-        return a + b
+    opacity: 0.95;
 
-calc = Calculadora()
+    box-shadow: 0 8px 20px rgba(0,0,0,0.28);
+}
 
-print(calc.soma(5, 3))
-</div>
+button:active {
 
-<h3>Herança</h3>
+    transform: scale(0.96);
 
-<p>
-    Uma classe pode herdar características de outra. [Reutilizar código]
-</p>
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
 
-<div class="code-example">
-class Animal:
+.ai-window {
 
-    def falar(self):
-        print("Som do animal")
+    position: fixed;
 
-class Cachorro(Animal):
+    left: 20px;
+top: 120px;
+left: 20px;
+    width: 280px;
+    height: 400px;
 
-    def falar(self):
-        print("Au au")
+    background: rgba(20, 20, 20, 0.65);
 
-dog = Cachorro()
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-dog.falar()
-</div>
+    border: 1px solid rgba(255,255,255,0.08);
 
+    border-radius: 24px;
 
-<h3>Encapsulamento</h3>
+    padding: 20px;
 
-<p>
-    Encapsulamento protege dados internos da classe. [Proteger dados]
-</p>
+    z-index: 9999;
 
-<div class="code-example">
-class Conta:
+    overflow-y: auto;
 
-    def __init__(self):
-        self.__saldo = 100
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
 
-conta = Conta()
+    color: white;
 
-    </div>
-<h3>Polimorfismo</h3>
+    font-family: Inter;
+}
 
-<p>
-    Polimorfismo permite que o mesmo método tenha comportamentos diferentes. [Mesmo método, comportamentos diferentes]
-</p>
+.ai-header {
 
-<div class="code-example">
-class Gato:
+    cursor: move;
 
-    def falar(self):
-        print("Miau")
+    user-select: none;
 
-class Cachorro:
+    margin-bottom: 15px;
+}
+.ai-btn {
 
-    def falar(self):
-        print("Au au")
+    width: 100%;
 
-animais = [Gato(), Cachorro()]
+    margin-top: 10px;
+    margin-bottom: 15px;
 
-for animal in animais:
-    animal.falar()
-</div>
+    padding: 12px;
 
+    border: none;
+    border-radius: 12px;
 
-<h3>Abstração</h3>
+    background: #198609;
 
-<p>
-    Abstração esconde detalhes complexos e define regras para outras classes. [Esconder complexidade]
-</p>
+    color: white;
 
-<div class="code-example">
-from abc import ABC, abstractmethod
+    cursor: pointer;
 
-class Forma(ABC):
+    font-weight: bold;
+}
 
-    @abstractmethod
-    def area(self):
-        pass
+#resultado {
 
-class Quadrado(Forma):
+    white-space: pre-wrap;
 
-    def __init__(self, lado):
-        self.lado = lado
+    background: #0b0b0b;
 
-    def area(self):
-        return self.lado * self.lado
+    border-radius: 12px;
 
-q = Quadrado(4)
+    padding: 15px;
 
-print(q.area())
-</div>
+    margin-top: 15px;
 
-    </div>
+    min-height: 200px;
 
-<!-- SIDEBAR EXEMPLOS -->
+    border: 1px solid #222;
+}
 
-<div class="sidebar" id="examplesSidebar">
+.dict-btn {
 
-    <div class="sidebar-header">
+    background: #2c2c2e;
 
-        <h2>💡 Code Examples</h2>
+    display: flex;
 
-        <button class="close-sidebar" onclick="toggleExamples()">
-            ✕
-        </button>
+    align-items: center;
 
-    </div>
+    justify-content: center;
 
-    <!-- HELLO WORLD -->
-    <h3>Hello World</h3>
+    gap: 8px;
 
-    <div class="code-wrapper">
+    white-space: nowrap;
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+    line-height: 1;
+}
 
-        <div class="code-example">print("Olá mundo!")
-        </div>
+        .container {
 
-    </div>
+            flex: 1;
 
-    <!-- PAR OU IMPAR -->
+            display: flex;
 
-    <h3>Verificar número par</h3>
+            flex-direction: column;
 
-    <div class="code-wrapper">
+            align-items: center;
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+            justify-content: center;
 
-        <div class="code-example">numero = 10
+            gap: 18px;
 
-if numero % 2 == 0:
-    print("Par")
-else:
-    print("Ímpar")
-        </div>
+            padding: 10px 30px 40px;
 
-    </div>
+    overflow-y: auto;
+    overflow-x: hidden;        }
 
-    <!-- FIZZBUZZ -->
+        .editor-box,
+        .output-box {
 
-    <h3>FizzBuzz</h3>
+            width: 100%;
 
-    <p>
-        Exercício clássico de entrevistas.
-    </p>
+            max-width: 950px;
 
-    <div class="code-wrapper">
+            background: #1c1c1e;
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+            border-radius: 28px;
 
-        <div class="code-example">for i in range(1, 101):
+            overflow: hidden;
 
-    if i % 3 == 0 and i % 5 == 0:
-        print("FizzBuzz")
+            border: 1px solid rgba(255,255,255,0.05);
 
-    elif i % 3 == 0:
-        print("Fizz")
+            box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+        }
 
-    elif i % 5 == 0:
-        print("Buzz")
+        .section-title {
 
-    else:
-        print(i)
-        </div>
+            padding: 14px 20px;
 
-    </div>
+            color: #8e8e93;
 
-    <!-- PALINDROMO -->
+            border-bottom: 1px solid rgba(255,255,255,0.05);
 
-    <h3>Palíndromo</h3>
+            font-size: 14px;
+        }
 
-        <p>
-            É uma palavra que, lida de trás para frente, permanece a mesma palavra.
-        </p>
+        #editor {
 
+            width: 100%;
 
-    <div class="code-wrapper">
+            height: 350px;
+        }
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+        #output {
 
-        <div class="code-example">texto = "radar"
+            min-height: 160px;
 
-if texto == texto[::-1]:
-    print("É palíndromo")
-        </div>
+            max-height: 160px;
 
-    </div>
+            overflow-y: auto;
 
-    <h3>Anagramas</h3>
+            padding: 20px;
 
-        <p>
-            É uma palavra formada pela reorganização das letras de outra.
-        </p>
+            color: #32d74b;
 
-        <div class="code-wrapper">
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
-        <div class="code-example">def anagram(s1,s2):
-    s1 = s1.replace(' ','').lower()
-    s2 = s2.replace(' ','').lower()
-    if sorted(s1) == sorted(s2):
-        return True
-    else:
-        return False
+            white-space: pre-wrap;
 
-s1 = 'galeria'
-s2 = 'alegria'
-print(anagram(s1,s2))
-        </div>
-        </div>
+            font-family: Consolas;
+        }
 
-    <!-- BUSCA LINEAR -->
+        .footer {
 
-    <h3>Busca Linear</h3>
+            padding: 10px;
 
-        <p>
-            Percorre a lista elemento por elemento usando um laço 'for'
-        </p>
+            text-align: center;
 
-    <div class="code-wrapper">
+            color: #6e6e73;
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+            font-size: 13px;
+        }
 
-        <div class="code-example">lista = [1, 5, 8, 10]
+        /* SIDEBARS */
 
-for item in lista:
+        .sidebar {
 
-    if item == 8:
-        print("Encontrado")
-        </div>
+            position: fixed;
 
-    </div>
-<!-- BUSCA BINÁRIA -->
+            top: 0;
+            right: -420px;
 
-<h3>Busca Binária</h3>
+            width: 400px;
+            height: 100vh;
 
-        <p>
-            Divide a lista (que deve estar ordenada) ao meio repetidamente para encontrar o alvo.
-        </p>
+            background: #1c1c1e;
 
-<div class="code-wrapper">
+            border-left: 1px solid rgba(255,255,255,0.08);
 
-    <button class="copy-mini" onclick="copyCode(this)">
-        ⧉
-    </button>
+            transition: 0.3s;
 
-    <div class="code-example">def busca_binaria(lista, alvo):
+            overflow-y: auto;
 
-    inicio = 0
-    fim = len(lista) - 1
+            padding: 24px;
 
-    while inicio <= fim:
+            z-index: 999;
+        }
 
-        meio = (inicio + fim) // 2
+        .sidebar.open {
 
-        if lista[meio] == alvo:
-            return True
+            right: 0;
+            border-radius: 24px;
+    
 
-        elif lista[meio] < alvo:
-            inicio = meio + 1
+        }
 
-        else:
-            fim = meio - 1
+        .sidebar-header {
 
-    return False
+            display: flex;
 
-numeros = [1, 3, 5, 7, 9, 11]
+            align-items: center;
 
-print(busca_binaria(numeros, 7))
-    </div>
+            justify-content: space-between;
+            
+            margin-bottom: 20px;
+        }
 
-</div>
+        /* BOTÃO ROBÔ */
 
-    <!-- FATORIAL -->
+.ai-float-btn {
 
-    <h3>Função Recursiva</h3>
+    position: fixed;
 
-    <div class="code-wrapper">
+    left: 20px;
+    bottom: 20px;
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+    width: 65px;
+    height: 65px;
 
-        <div class="code-example">def fatorial(n):
+    border-radius: 50%;
 
-    if n == 1:
-        return 1
+    border: none;
 
-    return n * fatorial(n - 1)
+    background: rgba(20,20,20,0.8);
 
-print(fatorial(5))
-        </div>
+    backdrop-filter: blur(10px);
 
-    </div>
+    color: white;
 
-    <!-- BUBBLE SORT -->
+    font-size: 28px;
 
-    <h3>Bubble Sort</h3>
+    cursor: pointer;
 
-    <div class="code-wrapper">
+    z-index: 99999;
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
 
-        <div class="code-example">numeros = [5, 2, 8, 1]
+    transition: 0.2s;
+}
 
-for i in range(len(numeros)):
+.ai-float-btn:hover {
 
-    for j in range(len(numeros)-1):
+    transform: scale(1.08);
+}
 
-        if numeros[j] > numeros[j+1]:
+/* JANELA IA */
 
-            numeros[j], numeros[j+1] = numeros[j+1], numeros[j]
+.ai-window {
 
-print(numeros)
-        </div>
+    position: fixed;
 
-    </div>
+    left: 20px;
+    bottom: 100px;
 
-    <!-- NUMERO PRIMO -->
+    width: 350px;
+    height: 450px;
 
-    <h3>Número Primo</h3>
+    background: rgba(29, 27, 27, 0.878);
 
-    <div class="code-wrapper">
+    backdrop-filter: blur(12px);
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+    border-radius: 24px;
 
-        <div class="code-example">numero = 17
+    border: 1px solid rgba(60, 130, 35, 0.848);
 
-primo = True
+    padding: 20px;
 
-for i in range(2, numero):
+    color: white;
 
-    if numero % i == 0:
-        primo = False
+    z-index: 99998;
 
-print(primo)
-        </div>
+    display: none;
 
-    </div>
+    overflow-y: auto;
+}
 
-    <!-- FIBONACCI -->
+/* HEADER */
 
-    <h3>Fibonacci</h3>
+.ai-header {
 
-    <div class="code-wrapper">
+    display: flex;
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+    justify-content: space-between;
 
-        <div class="code-example">a, b = 0, 1
+    align-items: center;
 
-for i in range(10):
+    margin-bottom: 15px;
 
-    print(a)
+    cursor: move;
+}
 
-    a, b = b, a + b
-        </div>
+/* FECHAR */
 
-    </div>
+.close-ai {
 
-    <!-- INVERTER STRING -->
+    background: transparent;
 
-    <h3>Inverter String</h3>
+    border: none;
 
-    <div class="code-wrapper">
+    color: white;
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+    font-size: 20px;
 
-        <div class="code-example">texto = "python"
+    cursor: pointer;
+}
 
-invertido = texto[::-1]
+        .close-sidebar {
 
-print(invertido)
-        </div>
+            width: 38px;
+            height: 38px;
 
-    </div>
+            border-radius: 50%;
 
-    <!-- CONTADOR -->
+            background: #2c2c2e;
 
-    <h3>Contador de Letras</h3>
+            color: white;
 
-    <div class="code-wrapper">
+            font-size: 18px;
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+            display: flex;
 
-        <div class="code-example">texto = "banana"
+            align-items: center;
+            justify-content: center;
 
-contador = {}
+            padding: 0;
 
-for letra in texto:
+        }
 
-    if letra in contador:
-        contador[letra] += 1
-    else:
-        contador[letra] = 1
+        .sidebar h2 {
 
-print(contador)
-        </div>
+            color: #a5e4b7;
+        }
 
-    </div>
+        .sidebar h3 {
 
-    <!-- MAIOR NUMERO -->
+            margin-top: 22px;
+            margin-bottom: 10px;
 
-    <h3>Encontrar Maior Número</h3>
+            color: white;
+        }
 
-    <div class="code-wrapper">
+        .sidebar p {
 
-        <button class="copy-mini" onclick="copyCode(this)">
-            ⧉
-        </button>
+            color: #b0b0b5;
 
-        <div class="code-example">lista = [10, 55, 3, 99, 24]
+            line-height: 1.6;
 
-maior = max(lista)
+            font-size: 14px;
+        }
 
-print(maior)
-        </div>
+        .code-example {
 
-    </div>
+            background: #111;
 
-</div>
+            padding: 14px;
 
-    </div>
+            border-radius: 14px;
 
-</div>
+            margin-top: 10px;
 
-<!-- BOTÃO FLUTUANTE -->
+            color: #32d74b;
 
-<button class="ai-float-btn" onclick="toggleAI()">
-    🤖
-</button>
+            font-family: Consolas;
 
-<!-- JANELA IA -->
+            white-space: pre-wrap;
+            
+        }
+.dict-title {
 
-<div class="ai-window" id="aiWindow">
+    display: flex;
 
-    <div class="ai-header" id="aiHeader">
+    align-items: center;
 
-        <h2>AI <span>Teacher</span></h2>
+    gap: 10px;
+}
 
-        <button class="close-ai" onclick="toggleAI()">
-            ✕
-        </button>
+.python-btn-logo {
 
-    </div>
+    width: 18px;
+    height: 18px;
 
-    <p id="status">
-        Let's go! 🤖
-    </p>
+    filter: drop-shadow(0 0 3px rgba(255,255,255,0.08));
+}
 
-    <button class="ai-btn" onclick="gerarExercicio()">
-        Gerar Exercício
-    </button>
+.python-logo {
 
-    <pre id="resultado"></pre>
+    width: 24px;
+    height: 24px;
 
-</div>
+    object-fit: contain;
+}
 
-</body>
-</html>
+
+
+.copy-mini {
+
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    background: rgba(255,255,255,0.06);
+
+    border: none;
+
+    color: #8e8e93;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    line-height: 1;
+
+    font-size: 14px;
+}
+
+.copy-mini:hover {
+
+    background: rgba(255,255,255,0.12);
+
+    color: white;
+}
+
+.code-wrapper {
+
+    position: relative;
+}
+@media (max-width: 768px) {
+
+    /* HEADER */
+    .topbar {
+        padding: 10px;
+        height: auto;
+    }
+
+    .topbar-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .logo {
+        text-align: center;
+        font-size: 18px;
+    }
+
+    /* BOTÕES */
+    .actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+
+    button {
+        width: 100%;
+        justify-content: center;
+        font-size: 14px;
+    }
+
+    /* CONTAINER PRINCIPAL */
+    .container {
+        padding: 10px;
+        gap: 12px;
+        overflow: visible; /* 🔥 importante para scroll funcionar */
+    }
+
+    /* EDITOR */
+    #editor {
+        height: 280px;
+    }
+
+    .editor-box,
+    .output-box {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        border-radius: 18px;
+    }
+
+    /* OUTPUT menor para caber melhor no celular */
+    #output {
+        max-height: 140px;
+    }
+
+    /* SIDEBAR (DICIONÁRIO + EXEMPLOS) */
+    .sidebar {
+        width: 100%;
+        right: -100%;
+        padding: 16px;
+    }
+
+    .sidebar.open {
+        right: 0;
+    }
+
+    /* melhora toque no mobile */
+    button {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+/* PROFESSOR IA MOBILE */
+.ai-window {
+
+    width: 260px;
+    max-width: 80%;
+
+    height: 380px; 
+
+    bottom: 80px;
+    left: 10px;
+
+    padding: 12px;
+
+    border-radius: 18px;
+
+    font-size: 13px;
+}
+
+.ai-header {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+.ai-header h2 {
+
+    font-size: 15px;
+    margin: 0;
+}
+
+.close-ai {
+
+    background: transparent;
+    border: none;
+
+    color: white;
+
+    font-size: 18px;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    padding: 0;
+}
+
+.ai-btn {
+
+    font-size: 13px;
+    padding: 10px;
+}
+
+#resultado {
+
+    max-height: 120px; /* menor altura */
+    overflow-y: auto;
+
+    font-size: 12px;
+}
+}
+
