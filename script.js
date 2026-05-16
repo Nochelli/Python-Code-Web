@@ -425,3 +425,25 @@ document.addEventListener("click", (e) => {
     }
 
 });
+
+
+async function corrigirCodigo(codigo, erro) {
+
+    const resposta = await fetch(
+        "https://SEU-BACKEND.onrender.com/ai",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                codigo,
+                erro
+            })
+        }
+    );
+
+    const dados = await resposta.json();
+
+    return dados.resposta;
+}
